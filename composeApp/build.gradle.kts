@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
@@ -31,7 +32,7 @@ kotlin {
     }
     
     jvm("desktop")
-    
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         moduleName = "composeApp"
@@ -50,6 +51,9 @@ kotlin {
             }
         }
         binaries.executable()
+        dependencies {
+//            implementation(libs.ktor.serialization.kotlinx.json.wasm.js)
+       }
     }
     
     sourceSets {
@@ -69,7 +73,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            val precompose_version = "1.6.2"
+            // Works as common dependency as well as the platform one
+            implementation(libs.kotlinx.serialization.json)
+//            implementation(libs.io.ktor.ktor.client.serialization)
 
             api(libs.precompose)
             api(libs.precompose.viewmodel) // For ViewModel intergration
@@ -79,6 +85,7 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
         }
+
     }
 }
 

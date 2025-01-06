@@ -1,4 +1,4 @@
-package com.corbettcode.mymovies
+package com.corbettcode.mymovies.ui
 
 import platform.UIKit.UIDevice
 

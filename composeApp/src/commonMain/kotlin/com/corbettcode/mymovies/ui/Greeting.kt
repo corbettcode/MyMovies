@@ -1,4 +1,4 @@
-package com.corbettcode.mymovies
+package com.corbettcode.mymovies.ui
 
 class Greeting {
     private val platform = getPlatform()
