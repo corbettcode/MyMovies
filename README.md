@@ -1,4 +1,5 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
+Status: 🚧 In progress
+This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop. It is still under heavy development and some screens are yet to be designed. This app is highly experimental and meant to serve as my personal playground for Kotlin multiplatform.
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:

@@ -1,13 +1,15 @@
 package com.corbettcode.mymovies
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
-import com.corbettcode.mymovies.ui.App
-import kotlinx.browser.document
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
 fun main() {
-    ComposeViewport(document.body!!) {
+    ComposeViewport(viewportContainerId = "composeApplication") {
         App()
     }
+//    ComposeViewport(document.body!!) {
+//        App()
+//    }
 }

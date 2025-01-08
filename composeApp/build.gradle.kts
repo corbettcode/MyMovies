@@ -76,6 +76,7 @@ kotlin {
             // Works as common dependency as well as the platform one
             implementation(libs.kotlinx.serialization.json)
 //            implementation(libs.io.ktor.ktor.client.serialization)
+            implementation(libs.kotlinx.datetime)
 
             // landscapist
             implementation(libs.landscapist.coil3)

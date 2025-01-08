@@ -1,4 +1,4 @@
-package com.corbettcode.mymovies.ui
+package com.corbettcode.mymovies
 
 class WasmPlatform: Platform {
     override val name: String = "Web with Kotlin/Wasm"

@@ -1,4 +1,4 @@
-package com.corbettcode.mymovies.ui
+package com.corbettcode.mymovies
 
 class JVMPlatform: Platform {
     override val name: String = "Java ${System.getProperty("java.version")}"

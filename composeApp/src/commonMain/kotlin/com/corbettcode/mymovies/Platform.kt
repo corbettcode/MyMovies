@@ -1,4 +1,4 @@
-package com.corbettcode.mymovies.ui
+package com.corbettcode.mymovies
 
 interface Platform {
     val name: String
