@@ -4,13 +4,28 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.AwaitPointerEventScope
 import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import platform.UIKit.UIScreen
 
 internal actual val CurrentPlatformTarget = PlatformTarget.Android
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+actual fun getScreenWidth(): Dp = LocalWindowInfo.current.containerSize.width.pxToPoint().dp
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+actual fun getScreenHeight(): Dp = LocalWindowInfo.current.containerSize.height.pxToPoint().dp
+
+fun Int.pxToPoint(): Double = this.toDouble() / UIScreen.mainScreen.scale
 
 @Composable
 internal actual fun Modifier.onPointerEventCommon(

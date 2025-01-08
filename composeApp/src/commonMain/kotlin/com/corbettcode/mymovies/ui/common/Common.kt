@@ -14,9 +14,12 @@ import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.unit.Dp
 
 data class CurrentWindowsSize(val height: Dp, val width: Dp)
-//
-//@Composable
-//internal expect fun LocalCurrentSize(): CurrentWindowsSize
+
+@Composable
+expect fun getScreenWidth(): Dp
+
+@Composable
+expect fun getScreenHeight(): Dp
 
 enum class PlatformTarget {
     Android, Jvm, Web

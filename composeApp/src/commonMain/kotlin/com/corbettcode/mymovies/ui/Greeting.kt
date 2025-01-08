@@ -1,9 +1,7 @@
-package com.corbettcode.mymovies.ui
+package com.jackz.kmmovies
 
 class Greeting {
-    private val platform = getPlatform()
-
-    fun greet(): String {
-        return "Hello, ${platform.name}!"
+    fun greeting(): String {
+        return "Movies, ${Platform().platform}!"
     }
 }

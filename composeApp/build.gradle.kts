@@ -66,7 +66,7 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
+            implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -84,6 +84,8 @@ kotlin {
             implementation(libs.landscapist.placeholder)
             implementation(libs.landscapist.animation)
             implementation(libs.landscapist.palette)
+
+            implementation("org.jetbrains.compose.material3:material3-window-size-class:1.7.3")
 
             api(libs.precompose)
             api(libs.precompose.viewmodel) // For ViewModel intergration

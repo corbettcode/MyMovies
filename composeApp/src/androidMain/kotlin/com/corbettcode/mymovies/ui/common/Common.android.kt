@@ -3,6 +3,7 @@ package com.corbettcode.mymovies.ui.common
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.AwaitPointerEventScope
@@ -11,14 +12,16 @@ import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 
 internal actual val CurrentPlatformTarget = PlatformTarget.Android
-//
-//@Composable
-//internal actual fun LocalCurrentSize() = CurrentWindowsSize(
-//    width = LocalConfiguration.current.screenWidthDp.dp,
-//    height = LocalConfiguration.current.screenHeightDp.dp
-//)
+
+@Composable
+actual fun getScreenWidth(): Dp = LocalConfiguration.current.screenWidthDp.dp
+
+@Composable
+actual fun getScreenHeight(): Dp = LocalConfiguration.current.screenHeightDp.dp
+
 
 @Composable
 internal actual fun Modifier.onPointerEventCommon(
