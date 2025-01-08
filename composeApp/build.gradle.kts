@@ -77,6 +77,14 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 //            implementation(libs.io.ktor.ktor.client.serialization)
 
+            // landscapist
+            implementation(libs.landscapist.coil3)
+
+            // those below plugin dependencies also support Kotlin Multiplatform.
+            implementation(libs.landscapist.placeholder)
+            implementation(libs.landscapist.animation)
+            implementation(libs.landscapist.palette)
+
             api(libs.precompose)
             api(libs.precompose.viewmodel) // For ViewModel intergration
 

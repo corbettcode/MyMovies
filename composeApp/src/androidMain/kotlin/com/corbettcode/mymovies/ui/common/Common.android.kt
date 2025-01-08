@@ -9,9 +9,16 @@ import androidx.compose.ui.input.pointer.AwaitPointerEventScope
 import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 
 internal actual val CurrentPlatformTarget = PlatformTarget.Android
+//
+//@Composable
+//internal actual fun LocalCurrentSize() = CurrentWindowsSize(
+//    width = LocalConfiguration.current.screenWidthDp.dp,
+//    height = LocalConfiguration.current.screenHeightDp.dp
+//)
 
 @Composable
 internal actual fun Modifier.onPointerEventCommon(
