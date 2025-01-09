@@ -1,22 +1,8 @@
 package com.corbettcode.mymovies
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.corbettcode.mymovies.di.ApplicationModule
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -28,41 +14,50 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @ExperimentalFoundationApi
 @Preview
 fun App() {
-    MaterialTheme {
-        var showCountries by remember { mutableStateOf(false) }
-        var timeAtLocation by remember { mutableStateOf("No location selected") }
-
-        Column(modifier = Modifier.padding(20.dp)) {
-            Text(
-                text = timeAtLocation,
-                style = TextStyle(fontSize = 20.sp),
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-                    .align(Alignment.CenterHorizontally)
-            )
-            Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
-                DropdownMenu(
-                    expanded = showCountries,
-                    onDismissRequest = { showCountries = false }
-                ) {
-                    defaultCountries.forEach { (name, zone) ->
-                        DropdownMenuItem(
-                            text = { Text(name) },
-                            onClick = {
-                                timeAtLocation = currentTimeAt(name, zone)
-                                showCountries = false
-                            }
-                        )
-                    }
-                }
-            }
-            Button(
-                modifier = Modifier.padding(start = 20.dp, top = 10.dp),
-                onClick = { showCountries = !showCountries }) {
-                Text("Select location")
-            }
-        }
+    val viewModel by lazy {
+        ApplicationModule.applicationViewModel
     }
+
+
+
+
+
+
+//    MaterialTheme {
+//        var showCountries by remember { mutableStateOf(false) }
+//        var timeAtLocation by remember { mutableStateOf("No location selected") }
+//
+//        Column(modifier = Modifier.padding(20.dp)) {
+//            Text(
+//                text = timeAtLocation,
+//                style = TextStyle(fontSize = 20.sp),
+//                textAlign = TextAlign.Center,
+//                modifier = Modifier.fillMaxWidth()
+//                    .align(Alignment.CenterHorizontally)
+//            )
+//            Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
+//                DropdownMenu(
+//                    expanded = showCountries,
+//                    onDismissRequest = { showCountries = false }
+//                ) {
+//                    defaultCountries.forEach { (name, zone) ->
+//                        DropdownMenuItem(
+//                            text = { Text(name) },
+//                            onClick = {
+//                                timeAtLocation = currentTimeAt(name, zone)
+//                                showCountries = false
+//                            }
+//                        )
+//                    }
+//                }
+//            }
+//            Button(
+//                modifier = Modifier.padding(start = 20.dp, top = 10.dp),
+//                onClick = { showCountries = !showCountries }) {
+//                Text("Select location")
+//            }
+//        }
+//    }
 }
 
 data class Country(val name: String, val zone: TimeZone)

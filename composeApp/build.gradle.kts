@@ -32,29 +32,29 @@ kotlin {
     }
     
     jvm("desktop")
-
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "composeApp"
-        browser {
-            val rootDirPath = project.rootDir.path
-            val projectDirPath = project.projectDir.path
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(rootDirPath)
-                        add(projectDirPath)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-        dependencies {
-//            implementation(libs.ktor.serialization.kotlinx.json.wasm.js)
-       }
-    }
+//
+//    @OptIn(ExperimentalWasmDsl::class)
+//    wasmJs {
+//        moduleName = "composeApp"
+//        browser {
+//            val rootDirPath = project.rootDir.path
+//            val projectDirPath = project.projectDir.path
+//            commonWebpackConfig {
+//                outputFileName = "composeApp.js"
+//                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+//                    static = (static ?: mutableListOf()).apply {
+//                        // Serve sources to debug inside browser
+//                        add(rootDirPath)
+//                        add(projectDirPath)
+//                    }
+//                }
+//            }
+//        }
+//        binaries.executable()
+//        dependencies {
+////            implementation(libs.ktor.serialization.kotlinx.json.wasm.js)
+//       }
+//    }
     
     sourceSets {
         val desktopMain by getting
@@ -77,6 +77,11 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 //            implementation(libs.io.ktor.ktor.client.serialization)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.json)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
 
             // landscapist
             implementation(libs.landscapist.coil3)
@@ -89,7 +94,7 @@ kotlin {
             implementation("org.jetbrains.compose.material3:material3-window-size-class:1.7.3")
 
             api(libs.precompose)
-            api(libs.precompose.viewmodel) // For ViewModel intergration
+            api(libs.precompose.viewmodel) // For ViewModel integration
 
         }
         desktopMain.dependencies {
