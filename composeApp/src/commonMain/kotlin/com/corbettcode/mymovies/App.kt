@@ -1,25 +1,77 @@
 package com.corbettcode.mymovies
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.adaptive.WindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import com.corbettcode.mymovies.di.ApplicationModule
+import com.corbettcode.mymovies.navigation.currentRoute
+import com.corbettcode.mymovies.ui.ApplicationViewModel
+import com.corbettcode.mymovies.ui.components.TopAppBarWithArrow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import moe.tlaster.precompose.PreComposeApp
+import moe.tlaster.precompose.navigation.BackHandler
+import moe.tlaster.precompose.navigation.Navigator
+import moe.tlaster.precompose.navigation.rememberNavigator
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@ExperimentalFoundationApi
+@OptIn(ExperimentalCoroutinesApi::class)
 @Preview
-fun App() {
-    val viewModel by lazy {
-        ApplicationModule.applicationViewModel
+internal fun App(
+    applicationViewModel: ApplicationViewModel = ApplicationModule.applicationViewModel,
+    windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
+) {
+    PreComposeApp {
+        var isAppBarVisible by remember { mutableStateOf(true) }
+        val isLoading by applicationViewModel.isLoading.collectAsState()
+        val navigator = rememberNavigator()
+        val pagerState = rememberPagerState { 2 }
+
+        BackHandler(isAppBarVisible.not()) {
+            isAppBarVisible = true
+        }
+        val currentRoute = currentRoute(navigator)
+
+        MaterialTheme {
+            Column(
+                modifier = Modifier.consumeWindowInsets(
+                    if (isAppBarVisible == true) {
+                        WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
+                    }
+                    else {
+                        WindowInsets( 0, 0, 0, 0)
+                    }
+                )
+            ) {
+                if (isAppBarVisible == true) {
+                    TopAppBarWithArrow(
+                        backEnabled = isBackButtonEnable(navigator),
+                        title = navigatorTitle(navigator)
+                    )
+                }
+                else {
+
+                }
+            }
+        }
+
+
     }
-
-
-
 
 
 
@@ -60,28 +112,15 @@ fun App() {
 //    }
 }
 
-data class Country(val name: String, val zone: TimeZone)
-fun currentTimeAt(location: String, zone: TimeZone): String {
-    fun LocalTime.formatted() = "$hour:$minute:$second"
+@Composable
+fun isBackButtonEnable(navigator: Navigator): Boolean {
+    return when (currentRoute(navigator)) {
+        NavigationScreen.ArtistDetail.route, NavigationScreen.MovieDetail.route, NavigationScreen.TvSeriesDetail.route -> {
+            true
+        }
 
-    val time = Clock.System.now()
-    val localTime = time.toLocalDateTime(zone).time
-
-    return "The time in $location is ${localTime.formatted()}"
-}
-
-val defaultCountries = listOf(
-    Country("Japan", TimeZone.of("Asia/Tokyo")),
-    Country("France", TimeZone.of("Europe/Paris")),
-    Country("Mexico", TimeZone.of("America/Mexico_City")),
-    Country("Indonesia", TimeZone.of("Asia/Jakarta")),
-    Country("Egypt", TimeZone.of("Africa/Cairo")),
-)
-
-fun todaysDate(): String {
-    fun LocalDateTime.format() = toString().substringBefore('T')
-
-    val now = Clock.System.now()
-    val zone = TimeZone.currentSystemDefault()
-    return now.toLocalDateTime(zone).format()
+        else -> {
+            false
+        }
+    }
 }

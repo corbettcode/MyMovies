@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_title">Kmp Movie</string>
+    <string name="movies">Movies</string>
+    <string name="movie_detail">Movie Detail</string>
+    <string name="tv_series">TV Series</string>
+    <string name="tv_series_detail">TV Series Detail</string>
+    <string name="artist_detail">Artist Detail</string>
+    <string name="know_for">Known for</string>
+    <string name="biography">Biography</string>
+    <string name="gender">Gender</string>
+    <string name="birth_day">Birthday</string>
+    <string name="place_of_birth">Place of Birth</string>
+    <string name="similar_movie">Similar Movie</string>
+    <string name="cast">Cast</string>
+    <string name="rating_">Rating :</string>
+    <string name="rating">Rating</string>
+    <string name="description">Description</string>
+    <string name="release_date">Release Date</string>
+    <string name="duration">Duration</string>
+    <string name="language">Language</string>
+    <string name="number_of_episode">No of Episode</string>
+    <string name="first_air">First Air</string>
+</resources>
