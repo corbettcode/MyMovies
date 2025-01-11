@@ -8,7 +8,7 @@ import com.corbettcode.mymovies.domain.repository.TmdbRepository
 import pe.fernan.kmp.tmdb.data.remote.TmdbClientApi
 
 
-class TmdbRepositoryActual(private val api: TmdbClientApi) : TmdbRepository {
+class OLD_TmdbRepositoryActual(private val api: TmdbClientApi) : TmdbRepository {
 
     private fun fixMediaTypeIfNotFound(mediaType: String, list: List<TmdbResult?>?): List<TmdbResult>? {
         return list?.filterNotNull()?.map {

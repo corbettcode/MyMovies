@@ -8,25 +8,28 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material3.SearchBar
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import com.corbettcode.mymovies.di.ApplicationModule
+import com.corbettcode.mymovies.navigation.MovieSection
 import com.corbettcode.mymovies.navigation.currentRoute
+import com.corbettcode.mymovies.navigation.isBottomBarVisible
 import com.corbettcode.mymovies.navigation.navigationTitle
 import com.corbettcode.mymovies.ui.ApplicationViewModel
+import com.corbettcode.mymovies.ui.components.SearchBar
 import com.corbettcode.mymovies.ui.components.TopAppBarWithArrow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.datetime.Clock
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.LocalTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.BackHandler
+import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.rememberNavigator
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -76,7 +79,47 @@ internal fun App(
                         isAppBarVisible = true
                     }
                 }
-            }
+
+                if (isBottomBarVisible(navigator)) {
+                    KMPNavigationSuiteScaffold(
+                        navigationSuiteItems = {
+                            items.forEach { destination ->
+                                item(
+                                    selected = destination.route == currentRoute,
+                                    onClick = {
+                                        navigator.navigate(
+                                            destination.route,
+                                            NavOptions(launchSingleTop = true),
+                                        )
+                                    },
+                                    icon = destination.navIcon,
+                                    label = { Text(text = destination.title, fontSize = 12.sp) },
+                                )
+                            }
+                        },
+                        windowAdaptiveInfo = windowAdaptiveInfo,
+                    ) {
+                        DestinationScaffold(
+                            navigator = navigator,
+                            appViewModel = appViewModel,
+                            isAppBarVisible = isAppBarVisible,
+                            isLoading = isLoading,
+                            pagerState = pagerState,
+                            onAppBarVisibilityChange = { isAppBarVisible = it }
+                        )
+                    }
+
+                }
+                else {
+                    DestinationScaffold(
+                        navigator = navigator,
+                        appViewModel = applicationViewModel,
+                        isAppBarVisible = isAppBarVisible,
+                        isLoading = isLoading,
+                        pagerState = pagerState,
+                        onAppBarVisibilityChange = { isAppBarVisible = it }
+                    )
+                }            }
         }
 
 
@@ -124,10 +167,12 @@ internal fun App(
 @Composable
 fun isBackButtonEnable(navigator: Navigator): Boolean {
     return when (currentRoute(navigator)) {
-        NavigationScreen.ArtistDetail.route, NavigationScreen.MovieDetail.route, NavigationScreen.TvSeriesDetail.route -> {
+        MovieSection.ArtistDetail.route,
+        MovieSection.MovieDetail.route,
+        MovieSection.TvSeriesDetail.route ->
+        {
             true
         }
-
         else -> {
             false
         }
