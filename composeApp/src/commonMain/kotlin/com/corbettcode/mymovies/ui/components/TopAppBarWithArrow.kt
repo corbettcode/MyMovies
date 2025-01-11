@@ -23,8 +23,8 @@ import com.corbettcode.mymovies.ui.theme.Purple500
 @Composable
 internal fun TopAppBarWithArrow(
     backEnabled: Boolean = false,
-    pressOnBack: () -> Unit,
     title: String?,
+    pressOnBack: () -> Unit,
 ) {
     TopAppBar(
         backgroundColor = Purple500,

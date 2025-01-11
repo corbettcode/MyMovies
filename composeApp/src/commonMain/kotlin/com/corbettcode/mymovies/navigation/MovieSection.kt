@@ -17,6 +17,11 @@ internal sealed class MovieSection(
     val route: String,
     val title: String = "",
 ) {
+    data object ArtistDetail : MovieSection(
+        route = "artist_detail",
+        parameterName = "id",
+        parameterPath = "/{id}"
+    )
     data object MovieDetail : MovieSection(
         route = "movie_detail",
         parameterName = "id",

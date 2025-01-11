@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -15,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.corbettcode.mymovies.di.ApplicationModule
 import com.corbettcode.mymovies.navigation.currentRoute
+import com.corbettcode.mymovies.navigation.navigationTitle
 import com.corbettcode.mymovies.ui.ApplicationViewModel
 import com.corbettcode.mymovies.ui.components.TopAppBarWithArrow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -61,11 +63,18 @@ internal fun App(
                 if (isAppBarVisible == true) {
                     TopAppBarWithArrow(
                         backEnabled = isBackButtonEnable(navigator),
-                        title = navigatorTitle(navigator)
-                    )
+                        title = navigationTitle(navigator),
+                    ) {
+                        navigator.popBackStack()
+                    }
                 }
                 else {
-
+                    SearchBar(
+                        viewModel = applicationViewModel,
+                        pagerState = pagerState,
+                    ) {
+                        isAppBarVisible = true
+                    }
                 }
             }
         }
