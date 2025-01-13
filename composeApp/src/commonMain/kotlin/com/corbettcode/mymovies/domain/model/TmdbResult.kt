@@ -13,7 +13,7 @@ data class TmdbResult(
     @SerialName("id")
     val id: Int?,
     @SerialName("title")
-    val title: String?,
+    val title: String,
     @SerialName("original_language")
     val originalLanguage: String?,
     @SerialName("original_title")
@@ -29,11 +29,11 @@ data class TmdbResult(
     @SerialName("popularity")
     val popularity: Double?,
     @SerialName("release_date")
-    val releaseDate: String?,
+    val releaseDate: String,
     @SerialName("video")
     val video: Boolean?,
     @SerialName("vote_average")
-    val voteAverage: Double?,
+    val voteAverage: Double,
     @SerialName("vote_count")
     val voteCount: Int?,
     @SerialName("name")

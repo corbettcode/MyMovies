@@ -3,6 +3,7 @@ package com.corbettcode.mymovies.navigation
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import com.corbettcode.mymovies.ui.details.artist.ArtistDetailView
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.path
@@ -21,7 +22,7 @@ fun Navigation(navigator: Navigator, page: Int) {
         scene(route = MovieSection.ArtistDetail.route.plus(MovieSection.ArtistDetail.parameterPath)) { backStackEntry ->
             val id: Int? = backStackEntry.path<Int>(MovieSection.ArtistDetail.parameterName)
             id?.let {
-                ArtistDetail(it)
+                ArtistDetailView(it)
             }
         }
 //        scene(route = MovieSection.NowPlayingMovie.route) {
@@ -39,7 +40,7 @@ fun Navigation(navigator: Navigator, page: Int) {
         scene(route = MovieSection.MovieDetail.route.plus(MovieSection.MovieDetail.parameterPath)) { backStackEntry ->
             val id: Int? = backStackEntry.path<Int>(MovieSection.MovieDetail.parameterName)
             id?.let {
-                MovieDetail(navigator, it)
+                MovieDetailView(it)
             }
         }
 //        scene(route = MovieSection.AiringTodayTvSeries.route) {
@@ -57,7 +58,7 @@ fun Navigation(navigator: Navigator, page: Int) {
         scene(route = MovieSection.TvSeriesDetail.route.plus(MovieSection.TvSeriesDetail.parameterPath)) { backStackEntry ->
             val id: Int? = backStackEntry.path<Int>(MovieSection.TvSeriesDetail.parameterName)
             id?.let {
-                TvSeriesDetail(navigator, it)
+                TvSeriesDetailView(it)
             }
         }
     }

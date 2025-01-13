@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
@@ -24,6 +25,7 @@ import com.corbettcode.mymovies.navigation.currentRoute
 import com.corbettcode.mymovies.navigation.isBottomBarVisible
 import com.corbettcode.mymovies.navigation.navigationTitle
 import com.corbettcode.mymovies.ui.ApplicationViewModel
+import com.corbettcode.mymovies.ui.components.DestinationScaffold
 import com.corbettcode.mymovies.ui.components.SearchBar
 import com.corbettcode.mymovies.ui.components.TopAppBarWithArrow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -101,7 +103,7 @@ internal fun App(
                     ) {
                         DestinationScaffold(
                             navigator = navigator,
-                            appViewModel = appViewModel,
+                            applicationViewModel = applicationViewModel,
                             isAppBarVisible = isAppBarVisible,
                             isLoading = isLoading,
                             pagerState = pagerState,
@@ -113,7 +115,7 @@ internal fun App(
                 else {
                     DestinationScaffold(
                         navigator = navigator,
-                        appViewModel = applicationViewModel,
+                        applicationViewModel = applicationViewModel,
                         isAppBarVisible = isAppBarVisible,
                         isLoading = isLoading,
                         pagerState = pagerState,

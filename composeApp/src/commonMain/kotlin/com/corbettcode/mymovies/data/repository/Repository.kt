@@ -1,10 +1,10 @@
 package data.repository
 
 import com.corbettcode.mymovies.utility.UiState
+import data.remote.TmdbApiService
 import kotlinx.coroutines.flow.flow
-import pe.fernan.kmp.tmdb.data.remote.TmdbClientApi
 
-class Repository(private val api: TmdbClientApi =  TmdbClientApi()) {
+class Repository(private val api: TmdbApiService =  TmdbApiService()) {
     suspend fun nowPlayingMovie(page: Int) = flow {
         try {
             emit(UiState.Loading)

@@ -1,4 +1,4 @@
-
+package com.corbettcode.mymovies.ui.extension
 
 fun String.format(vararg args: Any): String {
     val format = this

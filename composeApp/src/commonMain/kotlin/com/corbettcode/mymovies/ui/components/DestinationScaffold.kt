@@ -20,7 +20,7 @@ import moe.tlaster.precompose.navigation.Navigator
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-private fun DestinationScaffold(
+internal fun DestinationScaffold(
     navigator: Navigator,
     applicationViewModel: ApplicationViewModel,
     isAppBarVisible: Boolean,
@@ -40,7 +40,11 @@ private fun DestinationScaffold(
                         onClick = { onAppBarVisibilityChange(false) },
                         backgroundColor = FloatingActionBackground
                     ) {
-                        Icon(Icons.Filled.Search, "", tint = Color.White)
+                        Icon(
+                            Icons.Filled.Search,
+                            "",
+                            tint = Color.White
+                        )
                     }
                 }
             }
@@ -53,14 +57,14 @@ private fun DestinationScaffold(
                     if (pagerState.currentPage == 0) {
                         SearchForMovie(
                             navigator,
-                            appViewModel.movieSearchData.value
+                            applicationViewModel.movieSearchData.value
                         ) {
                             onAppBarVisibilityChange(true)
                         }
                     } else {
                         SearchForTVSeries(
                             navigator,
-                            appViewModel.tvSeriesSearchData.value
+                            applicationViewModel.tvSeriesSearchData.value
                         ) {
                             onAppBarVisibilityChange(true)
                         }

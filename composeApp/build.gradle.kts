@@ -1,8 +1,7 @@
+
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -71,6 +70,7 @@ kotlin {
 
             implementation(compose.material3)
             implementation(libs.compose.material3.adaptive)
+            implementation(libs.compose.material3.adaptive.navigation)
             implementation(libs.material3.window.size)
 
             implementation(compose.ui)

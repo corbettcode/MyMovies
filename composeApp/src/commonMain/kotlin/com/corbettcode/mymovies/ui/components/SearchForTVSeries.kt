@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.corbettcode.mymovies.data.extension.roundTo
-import com.corbettcode.mymovies.domain.model.TmdbResult
+import com.corbettcode.mymovies.data.model.tv.TvSeriesDetail
 import com.corbettcode.mymovies.navigation.MovieSection
 import com.corbettcode.mymovies.ui.extension.cornerRadius
 import com.corbettcode.mymovies.ui.theme.DefaultBackgroundColor
@@ -40,9 +40,9 @@ import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
-fun SearchForMovie(
+fun SearchForTVSeries(
     navController: Navigator,
-    searchData: List<TmdbResult>,
+    searchData: List<TvSeriesDetail>,
     itemClick: () -> Unit
 ) {
     LazyColumn(
@@ -66,8 +66,7 @@ fun SearchForMovie(
                                 "/${item.id}"
                             )
                         )
-                    }
-                ) {
+                    }) {
                     CoilImage(
                         imageModel = {
                             NetworkConstant.IMAGE_URL.plus(
@@ -87,13 +86,12 @@ fun SearchForMovie(
                         },
                         modifier = Modifier
                             .height(100.dp)
-                            .width(80.dp)
-                            .cornerRadius(8)
+                            .width(80.dp).cornerRadius(8)
                             .shimmerBackground(RoundedCornerShape(5.dp)),
                     )
                     Column {
                         Text(
-                            text = item.title,
+                            text = item.name,
                             modifier = Modifier.padding(
                                 start = 8.dp,
                                 top = 4.dp
@@ -101,7 +99,7 @@ fun SearchForMovie(
                             fontWeight = FontWeight.SemiBold
                         )
                         Text(
-                            text = item.releaseDate,
+                            text = item.firstAirDate,
                             color = FontColor,
                             fontSize = 16.sp,
                             modifier = Modifier.padding(start = 8.dp)
@@ -117,7 +115,7 @@ fun SearchForMovie(
                             modifier = Modifier.padding(start = 8.dp)
                         )
                     }
-            }
+               }
         })
     }
 }
