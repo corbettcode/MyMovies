@@ -14,6 +14,7 @@ import io.ktor.client.request.get
 import io.ktor.http.encodedPath
 
 class TmdbApiService : TmdbApiInterface {
+
     override suspend fun nowPlayingMovieList(
         page: Int,
     ): ResponseMovieList {

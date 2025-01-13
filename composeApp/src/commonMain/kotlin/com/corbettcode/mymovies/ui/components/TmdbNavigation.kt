@@ -23,6 +23,11 @@ import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItemColors
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,13 +38,13 @@ import com.corbettcode.mymovies.ui.theme.FontColor
  * Wraps Material 3 [NavigationSuiteScaffold].
  *
  * @param modifier Modifier to be applied to the navigation suite scaffold.
- * @param navigationSuiteItems A slot to display multiple items via [KMPNavigationSuiteScope].
+ * @param navigationSuiteItems A slot to display multiple items via [TmdbNavigationSuiteScope].
  * @param windowAdaptiveInfo The window adaptive info.
  * @param content The app content inside the scaffold.
  */
 @Composable
-fun KMPNavigationSuiteScaffold(
-    navigationSuiteItems: KMPNavigationSuiteScope.() -> Unit = {},
+fun TmdbNavigationSuiteScaffold(
+    navigationSuiteItems: TmdbNavigationSuiteScope.() -> Unit = {},
     modifier: Modifier = Modifier,
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
     content: @Composable () -> Unit,
@@ -47,29 +52,29 @@ fun KMPNavigationSuiteScaffold(
     val layoutType = NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(windowAdaptiveInfo)
     val navigationSuiteItemColors = NavigationSuiteItemColors(
         navigationBarItemColors = NavigationBarItemDefaults.colors(
-            selectedIconColor = KMPNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = KMPNavigationDefaults.navigationUnselectedItemColor(),
-            selectedTextColor = KMPNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = KMPNavigationDefaults.navigationUnselectedItemColor(),
+            selectedIconColor = TmdbNavigationDefaults.navigationSelectedItemColor(),
+            unselectedIconColor = TmdbNavigationDefaults.navigationUnselectedItemColor(),
+            selectedTextColor = TmdbNavigationDefaults.navigationSelectedItemColor(),
+            unselectedTextColor = TmdbNavigationDefaults.navigationUnselectedItemColor(),
             indicatorColor = Color.Transparent,
         ),
         navigationRailItemColors = NavigationRailItemDefaults.colors(
-            selectedIconColor = KMPNavigationDefaults.navigationRailItemColor(),
-            unselectedIconColor = KMPNavigationDefaults.navigationRailItemColor(),
-            selectedTextColor = KMPNavigationDefaults.navigationRailItemColor(),
-            unselectedTextColor = KMPNavigationDefaults.navigationRailItemColor(),
+            selectedIconColor = TmdbNavigationDefaults.navigationRailItemColor(),
+            unselectedIconColor = TmdbNavigationDefaults.navigationRailItemColor(),
+            selectedTextColor = TmdbNavigationDefaults.navigationRailItemColor(),
+            unselectedTextColor = TmdbNavigationDefaults.navigationRailItemColor(),
         ),
         navigationDrawerItemColors = NavigationDrawerItemDefaults.colors(
-            selectedIconColor = KMPNavigationDefaults.navigationRailItemColor(),
-            unselectedIconColor = KMPNavigationDefaults.navigationRailItemColor(),
-            selectedTextColor = KMPNavigationDefaults.navigationRailItemColor(),
-            unselectedTextColor = KMPNavigationDefaults.navigationRailItemColor(),
+            selectedIconColor = TmdbNavigationDefaults.navigationRailItemColor(),
+            unselectedIconColor = TmdbNavigationDefaults.navigationRailItemColor(),
+            selectedTextColor = TmdbNavigationDefaults.navigationRailItemColor(),
+            unselectedTextColor = TmdbNavigationDefaults.navigationRailItemColor(),
         ),
     )
 
     NavigationSuiteScaffold(
         navigationSuiteItems = {
-            KMPNavigationSuiteScope(
+            TmdbNavigationSuiteScope(
                 navigationSuiteScope = this,
                 navigationSuiteItemColors = navigationSuiteItemColors,
             ).run(navigationSuiteItems)
@@ -77,7 +82,7 @@ fun KMPNavigationSuiteScaffold(
         layoutType = layoutType,
         containerColor = Color.Transparent,
         navigationSuiteColors = NavigationSuiteDefaults.colors(
-            navigationBarContainerColor = KMPNavigationDefaults.navigationContainerColor(),
+            navigationBarContainerColor = TmdbNavigationDefaults.navigationContainerColor(),
             navigationRailContainerColor = Color.Transparent,
         ),
         modifier = modifier,
@@ -89,7 +94,7 @@ fun KMPNavigationSuiteScaffold(
 /**
  * A wrapper around [NavigationSuiteScope] to declare navigation items.
  */
-class KMPNavigationSuiteScope internal constructor(
+class TmdbNavigationSuiteScope internal constructor(
     private val navigationSuiteScope: NavigationSuiteScope,
     private val navigationSuiteItemColors: NavigationSuiteItemColors,
 ) {
@@ -112,7 +117,7 @@ class KMPNavigationSuiteScope internal constructor(
 /**
  * KMP Movie navigation default values.
  */
-object KMPNavigationDefaults {
+object TmdbNavigationDefaults {
     @Composable
     fun navigationContainerColor() = MaterialTheme.colors.primary
 

@@ -71,6 +71,7 @@ kotlin {
             implementation(compose.material3)
             implementation(libs.compose.material3.adaptive)
             implementation(libs.compose.material3.adaptive.navigation)
+            implementation(libs.compose.material3.adaptive.navigation.suite)
             implementation(libs.material3.window.size)
 
             implementation(compose.ui)

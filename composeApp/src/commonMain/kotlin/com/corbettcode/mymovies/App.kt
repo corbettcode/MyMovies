@@ -27,6 +27,7 @@ import com.corbettcode.mymovies.navigation.navigationTitle
 import com.corbettcode.mymovies.ui.ApplicationViewModel
 import com.corbettcode.mymovies.ui.components.DestinationScaffold
 import com.corbettcode.mymovies.ui.components.SearchBar
+import com.corbettcode.mymovies.ui.components.TmdbNavigationSuiteScaffold
 import com.corbettcode.mymovies.ui.components.TopAppBarWithArrow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import moe.tlaster.precompose.PreComposeApp
@@ -48,6 +49,21 @@ internal fun App(
         val isLoading by applicationViewModel.isLoading.collectAsState()
         val navigator = rememberNavigator()
         val pagerState = rememberPagerState { 2 }
+        val items = if (pagerState.currentPage == 0) {
+            listOf(
+                MovieSection.NowPlayingMovie,
+//                NavigationScreen.PopularMovieNav,
+//                NavigationScreen.TopRatedMovieNav,
+//                NavigationScreen.UpcomingMovieNav,
+            )
+        } else {
+            listOf(
+                MovieSection.AiringTodayTvSeries,
+//                NavigationScreen.OnTheAirTvSeriesNav,
+//                NavigationScreen.PopularTvSeriesNav,
+//                NavigationScreen.TopRatedTvSeriesNav,
+            )
+        }
 
         BackHandler(isAppBarVisible.not()) {
             isAppBarVisible = true
@@ -83,7 +99,7 @@ internal fun App(
                 }
 
                 if (isBottomBarVisible(navigator)) {
-                    KMPNavigationSuiteScaffold(
+                    TmdbNavigationSuiteScaffold(
                         navigationSuiteItems = {
                             items.forEach { destination ->
                                 item(
@@ -94,8 +110,11 @@ internal fun App(
                                             NavOptions(launchSingleTop = true),
                                         )
                                     },
-                                    icon = destination.navIcon,
-                                    label = { Text(text = destination.title, fontSize = 12.sp) },
+                                    icon = destination.icon,
+                                    label = { Text(
+                                        text = destination.title,
+                                        fontSize = 12.sp
+                                    ) },
                                 )
                             }
                         },
